@@ -1,0 +1,15 @@
+<div id='container'>
+<input placeholder="Add more sources" type="text" name="addSources" ng-model="addSources">
+<!-- currently called linkList | followingList -->
+<ul class="postList"> 
+
+<!-- <li class="link" ng-repeat="url in data.links | orderBy:"visits" : "reverse" | filter:"searchQ" -->
+	<li class="post">
+		<a href={{sourceUrl}}><img class="source"></a>
+		<!-- need to find a way to add different types of links //router? -->
+		<a href={{url}}><span class="title">{{url.title | limitTo: 75}} </span></a>
+		<span ng-model="context" name="context" class="context">{{url.context}}</span>
+	</li>
+	
+</ul>
+</div>
