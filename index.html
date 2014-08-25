@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>News Agg</title>
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./style.css">
+	</head>
+
+	<body><div id="wrapper">
+	<!-- Navigation Bar| APP Title| Username -->
+		<div class="navigation">
+			<ul>
+				<li><a><em>News Agg</em></a></li>
+				<li><a ui-sref="userAccount">{{username}}</a></li>
+			</ul>
+		</div>
+	<!-- Your Organizers -->
+		<div class=""></div>
+	<!-- Your followings | Angular Views and States -->
+		<div ui-view></div>
+	<!-- Your Page -->
+		<div class=""></div>
+<!-- 		<script>
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script> -->
+		<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular/lib/angular.js"></script>
+  </div></body>
