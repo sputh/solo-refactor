@@ -12,29 +12,28 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+## Personal Agg ##
+  > This is a personal news aggregator catered to integrating RSS feeds, blogs, and reddit.
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+## You, & your friends and their friend's friends ##
+  > Why wouldn'y everyone want to use it? This application is aimed at anyone who follows different sources of information and would like to consolidate them. 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > This application consolidates RSS Feed blogs, tumblr, and reddit into one easy to access page. The program allows easy view and organization of new posts in one easy to navigate page. The application also allows the user to organize their feed based on various topics.
 
-## Problem ##
-  > Describe the problem your product solves.
+## Tired of going through all your different social venues? ##
+  > This application aims to remove the hassle of needing to visit each individual blog and subreddit
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-
+  > This application aggregates the major personal news platform in one easy to navigate view.
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > This is amazing!
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Navigate to samputh.com and sign in!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > How did I live without this?
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Next.
