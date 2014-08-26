@@ -39,12 +39,23 @@ var npr = function(cat) {
 	}) 
 }
 
+var rssFeed= function() {
+	$.get('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/', function(data) {
+		console.log(data);
+	})
+}
+rssFeed();
+
+// var rssFeed = function(url) {
+// 	var url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q='+ url;
+// }
+
 // $('#addSource').on('click', function(){
 // 	alert('you've clicked it');
 // })
 
-reddit('http://www.reddit.com/.json?jsonp=?');
-npr('news');
+// reddit('http://www.reddit.com/.json?jsonp=?');
+// npr('news');
 
 // kiafathi.com
 // austentalbot.com    
