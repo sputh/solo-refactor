@@ -21,13 +21,17 @@ var getReddit = function(url) {
 	$.getJSON(jsonUrl, function (data){
 	  	$.each(data.data.children,
       function (i, post) {
+        // console.log('selftext', post.data.selftext)
         console.log(post);
-				$('#followings').append('<img src="./assets/reddit.png" class="icon">')
-        $('#followings').append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
-        $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '" target="iframe_a">' + post.data.permalink +"</a>" );
-        $('#followings').append( '<br>' + post.data.ups );
-        $('#followings').append( '<br>' + post.data.downs );
-        $('#followings').append( '<hr>' );
+        var divContainer = $('<div></div>');
+				divContainer.append('<img src="./assets/reddit.png" class="icon">')
+        divContainer.append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
+        divContainer.append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '" target="iframe_a">' + post.data.permalink +"</a>" );
+        divContainer.append( '<br>' + post.data.selftext );
+        divContainer.append( '<br>' + post.data.ups );
+        divContainer.append( '<br>' + post.data.downs );
+        divContainer.append( '<hr>' );
+        $('#followings').append(divContainer);
 	  });
 	});
 }
@@ -41,16 +45,18 @@ var getNpr = function(cat) {
 	var url = 'http://api.npr.org/query?id='+id+'&apiKey=MDE2NDAyNjQ0MDE0MDkwMTA3NjdiNDRlYQ001&output=json';
 	$.getJSON(url, function (data) {
 		$.each(data.list.story, function(i, post) {
-			$('#followings').append('<div class="content clear"><img src="./assets/npr.png" class="icon">')
+      var divContainer = $('<div></div>');
+			divContainer.append('<div class="content clear"><img src="./assets/npr.png" class="icon">')
 			if(post.thumbnail) {
-				$('#followings').append( '<center><img src="' + post.thumbnail.large.$text + '" class="thumbnail"></center>' );
+				divContainer.append( '<center><img src="' + post.thumbnail.large.$text + '" class="thumbnail"></center>' );
 			}
-			$('#followings').append( '<em><a class="postLink" href="'+post.link[0].$text+'" target="iframe_a">' + post.title.$text + '</a></em>');
+			divContainer.append( '<em><a class="postLink" href="'+post.link[0].$text+'" target="iframe_a">' + post.title.$text + '</a></em>');
 			if(post.byline) {
-				$('#followings').append( '  by  ' + post.byline[0].name.$text );
+				divContainer.append( '  by  ' + post.byline[0].name.$text );
 			};
-			$('#followings').append( '<br>' + post.teaser.$text + post.text.paragraph[0].$text);
-			$('#followings').append( '</div><hr>' );
+			divContainer.append( '<br>' + post.teaser.$text + post.text.paragraph[0].$text);
+			divContainer.append( '</div><hr>' );
+      $('#followings').append(divContainer);
 		})
 	})
 }
