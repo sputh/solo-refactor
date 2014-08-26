@@ -17,8 +17,13 @@
 		</div>
 <!-- Navigation Bar| APP Title| Username -->
   	<h1><center>News Agg</center></h1>
-  	<form><input type="text" placeholder="Enter URL"></input>
-  	<button id="addSource">Add Source</button></form>
+    <i class="addSubreddit glyphicon glyphicon-plus-sign col-md-">Add Subreddit</i>
+    <i class="addNprFeed glyphicon glyphicon-plus-sign col-md-">Add NPR Feed</i>
+    <i class="addRssFeed glyphicon glyphicon-plus-sign col-md-">Add Other RSS Feed</i>
+    <div id="panel">
+      <form><input type="text" placeholder="Enter URL" required pattern="https?://.+"></input>
+      <button id="addSource">Add Source</button></form>
+    </div>
 
 <!-- Your Organizers -->
     <!-- <span class="organ row span4"><h3>Your Organizers</h3></span> -->
@@ -28,11 +33,11 @@
     <h3>Your Followings</h3>
     <div id="followings"></div>
     </span>
-    <iframe id="articleFrame" src=""></iframe>
+    <iframe id="articleFrame" src="./iframe.html" name="iframe_a"></iframe>
     <!-- change src to redirect iframe view -->
     </div>
 <!-- Your Page -->
-		<!-- <span class="pages span4"><h3>Your Pages</h3></div> -->
+    <!-- <span class="pages span4"><h3>Your Pages</h3></div> -->
 
 
 

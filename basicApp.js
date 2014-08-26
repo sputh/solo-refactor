@@ -1,30 +1,64 @@
 var $followings = $('#followings');
 
+var siteRouter = function(url) {
+  var reddit = new RegExp('reddit', 'g');
+  var rss = new RegExp('rss', 'g');
+  var npr = new RegExp('npr', 'g');
+
+  if (reddit.test(url)) {
+    console.log('reddit');
+    getReddit(url);
+  } else if (rss.test(url) && npr.test(url)) {
+    getNpr(url);
+  } else if(rss.test(url)) {
+    getRssFeed(url);
+  } else {
+    // alert('not valid');
+    return;
+  };
+};
+
 var getUnixTime = function(ts) {
   var date = new Date(ts*1000);
   return (date);
 }
 
+$('.glyphicon').on('click', function() {
+  console.log('hi');
+  $('#panel').slideToggle('slow');
+})
+
 var GetJSON = function(url) {
   this.url = url;
   this.storage = {};
-  this.siteRouter();
+  // this.siteRouter();
 }
-var siteRouter = function(url) {
-  var reddit = new RegExp('reddit', 'g');
-  var rss = new RegExp('rss', g);
-  var npr = new RegExp('npr', g);
-  if (reddit.test(url)) {
-    url.getReddit();
-  } else if (rss.test(url) && npr.test(url)) {
-    url.getNpr();
-  } else if(rss.test(url)) {
-    url.getRssFeed();
-  } else {
-    alert('not valid');
-  };
-};
 
+var getReddit = function() {
+  var storage = this.storage;
+  var url = this.url;
+  $.getJSON(url, function (data){
+    $.each(data.data.children, function (i, post) {
+      storage = {
+        'b' : 10
+      }
+      storage.icon = "./assets/reddit.png";
+      storage.title = post.data.title;
+      storage.iframUrl = post.data.permalink;
+      storage.createdAt = getUnixTime(post.data.created);
+      storage.url= post.data.url;
+      storage.ups = post.data.ups;
+      storage.downs = post.data.downs;
+
+      $('#followings').append('<img src="./assets/reddit.png" class="icon">')
+      $('#followings').append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
+      $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '">' + post.data.permalink +"</a>" );
+      $('#followings').append( '<br>' + post.data.ups );
+      $('#followings').append( '<br>' + post.data.downs );
+      $('#followings').append( '<hr>' );
+    });
+  });
+}
 // var post = {
 //   icon:
 //   title:
@@ -34,23 +68,21 @@ var siteRouter = function(url) {
 // }
 
 // Gets Reddit's JSON
-var getReddit = function() {
-  this.storage = {'a':1};
-  var url = this;
+var getReddit = function(url) {
 	$.getJSON(url, function (data){
 	  	$.each(data.data.children,
       function (i, post) {
-        storage.icon = "./assets/reddit.png";
-        storage.iframUrl = post.data.permalink;
-        storage.url= post.data.url;
-        storage.createdAt = getUnixTime(post.data.created);
-        storage.title = post.data.title;
-        storage.ups = post.data.ups;
-        storage.downs = post.data.downs;
+        // storage.icon = "./assets/reddit.png";
+        // storage.iframUrl = post.data.permalink;
+        // storage.url= post.data.url;
+        // storage.createdAt = getUnixTime(post.data.created);
+        // storage.title = post.data.title;
+        // storage.ups = post.data.ups;
+        // storage.downs = post.data.downs;
 
 				$('#followings').append('<img src="./assets/reddit.png" class="icon">')
         $('#followings').append( '<a href="'+post.data.url+'"><em>' + post.data.title +'</em></a>');
-        $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '">' + post.data.permalink +"</a>" );
+        $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '" target="iframe_a">' + post.data.permalink +"</a>" );
         $('#followings').append( '<br>' + post.data.ups );
         $('#followings').append( '<br>' + post.data.downs );
         $('#followings').append( '<hr>' );
@@ -71,7 +103,7 @@ var getNpr = function(cat) {
 			if(post.thumbnail) {
 				$('#followings').append( '<center><img src="' + post.thumbnail.large.$text + '" class="thumbnail"></center>' );
 			}
-			$('#followings').append( '<em><a class="postLink" href="'+post.link[0].$text+'">' + post.title.$text + '</a></em>');
+			$('#followings').append( '<em><a class="postLink" href="'+post.link[0].$text+'" target="iframe_a">' + post.title.$text + '</a></em>');
 			if(post.byline) {
 				$('#followings').append( '  by  ' + post.byline[0].name.$text );
 			};
@@ -96,10 +128,12 @@ var getRssFeed = function(url, name) {
     dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
     success:function(json){
 	   	$.each(json.responseData.feed.entries, function(i, post) {
-	   		$('#followings').append('<div class="content clear"><img src="'+ profilePic + '" class="icon">')
-	   		$('#followings').append( '<em><a class="postLink" href="'+post.link+'">' + post.title + '</a></em>');
-	   		$('#followings').append( '<br>' + post.publishedDate + post.contentSnippet);
-	   		$('#followings').append( '</div><hr>' );
+        var divContainer = $('<div></div>');
+	   		divContainer.append('<div class="content clear"><img src="'+ profilePic + '" class="icon">')
+	   		divContainer.append( '<em><a class="postLink" href="'+post.link+'" target="iframe_a">' + post.title + '</a></em>');
+	   		divContainer.append( '<br>' + post.publishedDate + post.contentSnippet);
+	   		divContainer.append( '</div><hr>' );
+        $('#followings').append(divContainer);
 	   	})
   	},
     error:function(){
@@ -116,7 +150,9 @@ $('#addSource').on('click', function(){
 
 // $(."postLink").on('click')
 var perm = 'http://www.reddit.com/.json?jsonp=?'
-// getReddit(perm);
+// var testing = new GetJSON(perm);
+// siteRouter(perm);
+// console.log("storage", testing.storage);
 getReddit(perm);
 // console.log(perm.storage);
 getNpr('news');
