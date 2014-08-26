@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>News Agg</title>
-		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="./style.css">
 	</head>
 
@@ -11,18 +11,25 @@
 		<div class="navigation">
 			<ul>
 				<li><a><em>News Agg</em></a></li>
-				<li><a ui-sref="userAccount">{{username}}</a></li>
+				<li style="float: right"><a ui-sref="userAccount">{{username}}</a></li>
 			</ul>
 		</div>
 
+	<h1><center>News Agg</center></h1>
+	<form><input type="text" placeholder="Enter URL"></input>
+	<button id="addSource">Add Source</button></form>
+
 	<!-- Your Organizers -->
-		<div class=""></div>
+		<span class="organ row span4"><h3>Your Organizers</h3></span>
 
 	<!-- Your followings | Angular Views and States -->
-		<div ui-view></div>
+		<span class="row span10">
+		<h3>Your Followings</h3>
+		<div id="followings"></div>
+		</span>
 
 	<!-- Your Page -->
-		<div class=""></div>
+		<span class="pages span4"><h3>Your Pages</h3></div>
 
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
