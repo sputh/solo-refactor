@@ -1,23 +1,5 @@
 var $followings = $('#followings');
 
-var siteRouter = function(url) {
-  var reddit = new RegExp('reddit', 'g');
-  var rss = new RegExp('rss', 'g');
-  var npr = new RegExp('npr', 'g');
-
-  if (reddit.test(url)) {
-    console.log('reddit');
-    getReddit(url);
-  } else if (rss.test(url) && npr.test(url)) {
-    getNpr(url);
-  } else if(rss.test(url)) {
-    getRssFeed(url);
-  } else {
-    // alert('not valid');
-    return;
-  };
-};
-
 var getUnixTime = function(ts) {
   var date = new Date(ts*1000);
   return (date);
@@ -28,60 +10,20 @@ $('.glyphicon').on('click', function() {
   $('#panel').slideToggle('slow');
 })
 
-var GetJSON = function(url) {
-  this.url = url;
-  this.storage = {};
-  // this.siteRouter();
-}
-
-var getReddit = function() {
-  var storage = this.storage;
-  var url = this.url;
-  $.getJSON(url, function (data){
-    $.each(data.data.children, function (i, post) {
-      storage = {
-        'b' : 10
-      }
-      storage.icon = "./assets/reddit.png";
-      storage.title = post.data.title;
-      storage.iframUrl = post.data.permalink;
-      storage.createdAt = getUnixTime(post.data.created);
-      storage.url= post.data.url;
-      storage.ups = post.data.ups;
-      storage.downs = post.data.downs;
-
-      $('#followings').append('<img src="./assets/reddit.png" class="icon">')
-      $('#followings').append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
-      $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '">' + post.data.permalink +"</a>" );
-      $('#followings').append( '<br>' + post.data.ups );
-      $('#followings').append( '<br>' + post.data.downs );
-      $('#followings').append( '<hr>' );
-    });
-  });
-}
-// var post = {
-//   icon:
-//   title:
-//   url:
-//   createdAt:
-//   snippet:
-// }
-
 // Gets Reddit's JSON
 var getReddit = function(url) {
-	$.getJSON(url, function (data){
+  var jsonUrl;
+  if(!url) {
+    jsonUrl = 'http://www.reddit.com/.json?jsonp=?'
+  } else {
+    jsonUrl= 'http://www.reddit.com/r/' + url +'/.json?jsonp=?'
+  }
+	$.getJSON(jsonUrl, function (data){
 	  	$.each(data.data.children,
       function (i, post) {
-        // storage.icon = "./assets/reddit.png";
-        // storage.iframUrl = post.data.permalink;
-        // storage.url= post.data.url;
-        // storage.createdAt = getUnixTime(post.data.created);
-        // storage.title = post.data.title;
-        // storage.ups = post.data.ups;
-        // storage.downs = post.data.downs;
-
+        console.log(post);
 				$('#followings').append('<img src="./assets/reddit.png" class="icon">')
-        $('#followings').append( '<a href="'+post.data.url+'"><em>' + post.data.title +'</em></a>');
+        $('#followings').append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
         $('#followings').append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '" target="iframe_a">' + post.data.permalink +"</a>" );
         $('#followings').append( '<br>' + post.data.ups );
         $('#followings').append( '<br>' + post.data.downs );
@@ -115,12 +57,15 @@ var getNpr = function(cat) {
 
 // Gets other RSS Feeds
 var getRssFeed = function(url, name) {
+  // name = name | 'else';
 	var profilePic;
 	if (name ==='kia') {
 		profilePic = './assets/kia.png';
 	} else if (name === 'austen') {
 		profilePic = './assets/austen.jpg';
-	}
+	} else {
+    profilePic = './assets/rss.png';
+  }
 
 	var feedApiGetJSON = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q='+ url;
 	$.ajax({
@@ -148,13 +93,11 @@ $('#addSource').on('click', function(){
 	// create a ROUTER!
 })
 
-// $(."postLink").on('click')
 var perm = 'http://www.reddit.com/.json?jsonp=?'
-// var testing = new GetJSON(perm);
-// siteRouter(perm);
-// console.log("storage", testing.storage);
-getReddit(perm);
-// console.log(perm.storage);
+// getReddit('http://www.reddit.com/');
+// getReddit();
+getReddit('dataisbeautiful')
 getNpr('news');
 getRssFeed('http://kiafathi.azurewebsites.net/rss/', 'kia');
 getRssFeed('http://www.austentalbot.com/rss/', 'austen');
+// getRssFeed('http://www.reddit.com/');

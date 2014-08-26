@@ -1,5 +1,6 @@
 angular.module('navView')
-.controller('navView', ['$scope', '$modal', '$rootScope', 'toggleUnread', '$window','resizeReader', function($scope, $modal, $rootScope, toggleUnread, $window, resizeReader){
+.controller('navView', ['$scope', '$modal', '$rootScope', 'toggleUnread', '$window','resizeReader',
+  function($scope, $modal, $rootScope, toggleUnread, $window, resizeReader){
 
   $scope.open = false;
 
@@ -16,13 +17,14 @@ angular.module('navView')
     $scope.open = !$scope.open;
   };
 
-  // $scope.openModal = function () {
-  //   var modalInstance = $modal.open({
-  //     controller: 'login',
-  //     templateUrl: 'client/shellView/components/auth/login/login.html',
-  //     size: 'sm'
-  //   });
-  // };
+  $scope.openModal = function () {
+    // var modalInstance = $modal.open({
+    //   controller: 'login',
+    //   templateUrl: 'client/shellView/components/auth/login/login.html',
+    //   size: 'sm'
+    // });
+    console.log('open');
+  };
 
   $window.onresize = function(){
     resizeReader(open);
