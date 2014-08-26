@@ -39,12 +39,41 @@ var npr = function(cat) {
 	}) 
 }
 
+
 var rssFeed= function() {
-	$.get('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/', function(data) {
-		console.log(data);
-	})
+	$.ajax({
+	  // always use this url
+	  url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/',
+	  type: 'GET',
+	  // data: JSON.stringify(message),
+	  contentType: 'application/json',
+	  success: function (data) {
+	    console.log(data);
+	  },
+	  error: function (data) {
+	    // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
+	    console.error('Failed to recieve data');
+	  }
+	});
 }
 rssFeed();
+
+
+// 			function GetContent() {
+// 			  var feedApiGetJSON = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/';
+// 				$.ajax({
+// 		    	url: feedApiGetJSON,
+// 		    	dataType: 'jsonp',
+// 		    	jsonpCallback: 'JsonpCallback'
+// 				}); 
+// 			}
+// function JsonpCallback(data) {
+// 	if (data.responseStatus == "200") {
+// 		// for (var i = 0; i < data.responseData.feed.entries.length; i++) {
+// 		// }
+// 		console.log(data);
+// 	}
+// }
 
 // var rssFeed = function(url) {
 // 	var url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q='+ url;
