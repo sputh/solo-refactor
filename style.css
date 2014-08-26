@@ -34,10 +34,29 @@
   background-color: #ccc;
 }
 
-.rowP{
+.rowP {
   background-color: red
 }
 
-.rowS{
+.rowS {
   background-color: blue
 }
+
+.icon {
+  width: 5%;
+  height: 12%;
+  float: left;
+  padding: 0.3%;
+}
+
+.thumbnail {
+  float: right;
+}
+
+.content {
+  padding: 0.5%;
+  height: auto;
+  background-color: red;
+}
+
+.clear { clear: both; }

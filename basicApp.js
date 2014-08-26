@@ -1,15 +1,14 @@
 var $followings = $('#followings');
 
 // Get's Reddit's JSON
-
 var reddit = function(url) {
-	$.getJSON(url,
-	  function (data){
+	$.getJSON(url, function (data){
 	  	$.each(data.data.children,
       function (i, post) {
-        $('#followings').append( '<br>' + '<a href=post.data.url>' + post.data.title +'</a>');
-        $('#followings').append( '<br>' + post.data.url );
-        $('#followings').append( '<br>' + post.data.permalink );
+      	console.log('rp', post)
+				$('#followings').append('<img src="./assets/reddit.png" class="icon">')
+        $('#followings').append( '<a href="'+post.data.url+'"><em>' + post.data.title +'</em></a>');
+        $('#followings').append( '<br><a href="http://www.reddit.com/'+post.data.permalink + '">' + post.data.permalink +"</a>" );
         $('#followings').append( '<br>' + post.data.ups );
         $('#followings').append( '<br>' + post.data.downs );
         $('#followings').append( '<hr>' );
@@ -17,28 +16,35 @@ var reddit = function(url) {
 	});
 }
 
-// reddit('http://www.reddit.com/.json?jsonp=?');
+// Get's NPR's RSS Feed
+var nprRouter = {
+	'news' : 1001,
+}
+var npr = function(cat) {
+	var id = nprRouter[cat];
+	var url = 'http://api.npr.org/query?id='+id+'&apiKey=MDE2NDAyNjQ0MDE0MDkwMTA3NjdiNDRlYQ001&output=json';
+	$.getJSON(url, function (data) {
+		$.each(data.list.story, function(i, post) {
+			$('#followings').append('<div class="content clear"><img src="./assets/npr.png" class="icon">')
+			if(post.thumbnail) {
+				$('#followings').append( '<center><img src="' + post.thumbnail.large.$text + '" class="thumbnail"></center>' );
+			}
+			$('#followings').append( '<em><a href="'+post.link[0].$text+'">' + post.title.$text + '</a></em>');
+			if(post.byline) {
+				$('#followings').append( '  by  ' + post.byline[0].name.$text );
+			};
+			$('#followings').append( '<br>' + post.teaser.$text + post.text.paragraph[0].$text);
+			$('#followings').append( '</div><hr>' );
+		})
+	}) 
+}
 
 // $('#addSource').on('click', function(){
 // 	alert('you've clicked it');
 // })
-// Get's NPR's RSS Feed
-$.getJSON('http://api.npr.org/query?id=1001&apiKey=MDE2NDAyNjQ0MDE0MDkwMTA3NjdiNDRlYQ001&output=json', 
-	function (data) {
-		$.each(data.list, 
-			function(i, post) {
-				// $('#followings').append( '<br>' + post.title)
-				console.log("post", post.$text);
-			})
-		console.log('data', data)
-	}
-)      
-		// $.each(data.item,
-		// 	function(i, post) {
-		// 		console.log("i", i);
-		// 		console.log('post', post);
-		// 	}
-		// 	// $('#followings').append( '<br>' + data.title.$text);
-		// 	// $('#followings').append('<hr>');
-		// );
-		// console.log('data', data);}
+
+reddit('http://www.reddit.com/.json?jsonp=?');
+npr('news');
+
+// kiafathi.com
+// austentalbot.com    
