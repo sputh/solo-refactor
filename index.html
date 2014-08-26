@@ -5,9 +5,11 @@
 		<link rel="stylesheet" type="text/css" href="./style.css">
 	</head>
 
-	<body><div id="wrapper">
+	<body>
+	<div id="wrapper">
+	<div class="main" ui-view></div>
 
-	<!-- Navigation Bar| APP Title| Username -->
+<!-- Navigation Bar| APP Title| Username -->
 		<div class="navigation">
 			<ul>
 				<li><a><em>News Agg</em></a></li>
@@ -19,22 +21,28 @@
 	<form><input type="text" placeholder="Enter URL"></input>
 	<button id="addSource">Add Source</button></form>
 
-	<!-- Your Organizers -->
+<!-- Your Organizers -->
 		<span class="organ row span4"><h3>Your Organizers</h3></span>
 
-	<!-- Your followings | Angular Views and States -->
+<!-- Your followings | Angular Views and States -->
 		<span class="row span10">
 		<h3>Your Followings</h3>
 		<div id="followings"></div>
 		</span>
 
-	<!-- Your Page -->
+<!-- Your Page -->
 		<span class="pages span4"><h3>Your Pages</h3></div>
 
+<!-- script injections -->
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <script src="basicApp.js"></script>
+    <script src="./app/app.js"></script>
+    <!-- <script src="./app/nav/navbar.html"></script> -->
+    <script src="./app/nav/navbar.js"></script>
+    <script src="./app/nav/navbarCntrl.js"></script>
 
-  </div></body>
+  </div>
+  </body>

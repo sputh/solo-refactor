@@ -5,7 +5,6 @@ var reddit = function(url) {
 	$.getJSON(url, function (data){
 	  	$.each(data.data.children,
       function (i, post) {
-      	console.log('rp', post)
 				$('#followings').append('<img src="./assets/reddit.png" class="icon">')
         $('#followings').append( '<a href="'+post.data.url+'"><em>' + post.data.title +'</em></a>');
         $('#followings').append( '<br><a href="http://www.reddit.com/'+post.data.permalink + '">' + post.data.permalink +"</a>" );
@@ -39,52 +38,42 @@ var npr = function(cat) {
 	}) 
 }
 
+var rssFeed = function(url, name) {
+	var profilePic;
+	if (name ==='kia') {
+		profilePic = './assets/kia.jpg';
+	} else if (name === 'austen') {
+		profilePic = './assets/austen.jpg';
+	}
 
-var rssFeed= function() {
+	var feedApiGetJSON = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q='+ url;
 	$.ajax({
-	  // always use this url
-	  url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/',
-	  type: 'GET',
-	  // data: JSON.stringify(message),
-	  contentType: 'application/json',
-	  success: function (data) {
-	    console.log(data);
-	  },
-	  error: function (data) {
-	    // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
-	    console.error('Failed to recieve data');
-	  }
+    url:feedApiGetJSON,
+    dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
+    success:function(json){
+	   	$.each(json.responseData.feed.entries, function(i, post) {
+	   		$('#followings').append('<div class="content clear"><img src="'+ profilePic + '" class="icon">')
+	   		// if(post.content) {
+	   		// 	$('#followings').append(post.content);
+	   		// }
+	   		$('#followings').append( '<em><a href="'+post.link+'">' + post.title + '</a></em>');
+	   		$('#followings').append( '<br>' + post.publishedDate + post.contentSnippet);
+	   		$('#followings').append( '</div><hr>' );
+	   	})
+  	},
+    error:function(){
+        alert("Error");
+    }      
 	});
-}
-rssFeed();
+};
 
 
-// 			function GetContent() {
-// 			  var feedApiGetJSON = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=http://kiafathi.azurewebsites.net/rss/';
-// 				$.ajax({
-// 		    	url: feedApiGetJSON,
-// 		    	dataType: 'jsonp',
-// 		    	jsonpCallback: 'JsonpCallback'
-// 				}); 
-// 			}
-// function JsonpCallback(data) {
-// 	if (data.responseStatus == "200") {
-// 		// for (var i = 0; i < data.responseData.feed.entries.length; i++) {
-// 		// }
-// 		console.log(data);
-// 	}
-// }
+$('#addSource').on('click', function(){
+	event.preventDefault();
+	// create a ROUTER!
+})
 
-// var rssFeed = function(url) {
-// 	var url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q='+ url;
-// }
-
-// $('#addSource').on('click', function(){
-// 	alert('you've clicked it');
-// })
-
-// reddit('http://www.reddit.com/.json?jsonp=?');
-// npr('news');
-
-// kiafathi.com
-// austentalbot.com    
+reddit('http://www.reddit.com/.json?jsonp=?');
+npr('news');
+rssFeed('http://kiafathi.azurewebsites.net/rss/', 'kia');
+rssFeed('http://www.austentalbot.com/rss/', 'austen'); 

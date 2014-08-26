@@ -1,6 +1,8 @@
 angular.module('agg', [
-	'ui.router'])
+	'ui.router',
+	'ui.bootstrap'
+]);
 
-.config(function() {
+// .config(function() {
 	
-})
+// })
