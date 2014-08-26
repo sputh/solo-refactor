@@ -5,7 +5,7 @@
 .navigation {
   width: 100%;
   height: 40px;
-  background-color: #eee;
+  background-color: #333333;
 }
 .navigation ul {
   margin: 0;
@@ -13,8 +13,9 @@
   list-style: none;
 }
 
-.navigation li {
+.navigation #header {
   float: left;
+  overflow: visible;
 }
 
 .navigation li a {
@@ -22,20 +23,48 @@
   height: 20px;
   line-height: 20px;
   padding: 10px;
-  display: block;
   text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: larger;
 }
 
-.navigation li a:hover {
+/*.navigation li a:hover {
   background-color: #ddd;
 }
 
 .navigation li a.selected {
   background-color: #ccc;
+}*/
+
+.container {
+  width: 100%;
+  height: 80%;
+  /*overflow: hidden;*/
+}
+
+.following {
+  float: left;
+  width: 35%;
+  height: 80%;
+}
+
+#followings {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*overflow-x: scroll;*/
+  font-family: 'Droid Sans', serif;
+  font-size: 12;
+}
+
+#articleframe {
+  float: right;
+  width: 65%;
+  height: 100%;
 }
 
 .rowP {
-  background-color: red
+  background-color: purple
 }
 
 .rowS {
@@ -43,8 +72,8 @@
 }
 
 .icon {
-  width: 5%;
-  height: 12%;
+  width: 60px;
+  height: 60px;
   float: left;
   padding: 0.3%;
 }
@@ -56,7 +85,7 @@
 .content {
   padding: 0.5%;
   height: auto;
-  background-color: red;
+  background-color: purple;
 }
 
 .clear { clear: both; }
