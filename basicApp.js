@@ -17,8 +17,8 @@ var getReddit = function(url) {
       $.each(data.data.children,
       function (i, post) {
         // console.log('selftext', post.data.selftext)
-        console.log(post);
-        var divContainer = $('<div></div>');
+        // console.log(post);
+        var divContainer = $('<div class="group"></div>');
         divContainer.append('<img src="./assets/reddit.png" class="icon">')
         divContainer.append( '<a href="'+post.data.url+'" target="iframe_a"><em>' + post.data.title +'</em></a>');
         divContainer.append( '<br><a class="postLink" href="http://www.reddit.com/'+post.data.permalink + '" target="iframe_a">' + post.data.permalink +"</a>" );
@@ -34,6 +34,16 @@ var getReddit = function(url) {
 // Gets NPR's RSS Feed
 var nprRouter = {
   'news' : 1001,
+  'economy' : 1017,
+  'education' : 1013,
+  'environment' : 1025,
+  'all' : 3002,
+  'music' : 3018,
+  'food' : 1053,
+  'science' : 1007,
+  'space' : 1026,
+  'sports' : 1055,
+  'health' : 1128
 }
 var getNpr = function(cat) {
   var id = nprRouter[cat];
@@ -51,7 +61,7 @@ var getNpr = function(cat) {
       };
       divContainer.append( '<br>' + post.teaser.$text + post.text.paragraph[0].$text);
       divContainer.append( '</div><hr>' );
-      $('#followings').append(divContainer);
+      $('#followings').prepend(divContainer);
     })
   })
 }
@@ -79,7 +89,7 @@ var getRssFeed = function(url, name) {
         divContainer.append( '<em><a class="postLink" href="'+post.link+'" target="iframe_a">' + post.title + '</a></em>');
         divContainer.append( '<br>' + post.publishedDate + post.contentSnippet);
         divContainer.append( '</div><hr>' );
-        $('#followings').append(divContainer);
+        $('#followings').prepend(divContainer);
       })
     },
     error:function(){
