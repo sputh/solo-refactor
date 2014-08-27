@@ -1,13 +1,13 @@
 <html ng-app="agg">
-	<head>
-		<title>News Agg</title>
-		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="./style.css">
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-	</head>
+<head>
+  <title>News Agg</title>
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+</head>
 
-	<body>
+<body>
 	<div id="wrapper">
 		<div class="navigation">
 			<ul>
@@ -15,35 +15,49 @@
 				<li style="float: right"><a ui-sref="userAccount">S A M P U T H</a></li>
 			</ul>
 		</div>
-<!-- Navigation Bar| APP Title| Username -->
-  	<h1><center>P E R S</center></h1>
-    <i class="addSubreddit glyphicon glyphicon-plus-sign col-md-">Add Subreddit</i>
-    <i class="addNprFeed glyphicon glyphicon-plus-sign col-md-">Add NPR Feed</i>
-    <i class="addRssFeed glyphicon glyphicon-plus-sign col-md-">Add Other RSS Feed</i>
-    <div id="panel">
-      <form><input type="text" placeholder="Enter URL" required pattern="https?://.+"></input>
-      <button id="addSource">Add Source</button></form>
-    </div>
+    <!-- Navigation Bar| APP Title| Username -->
+    <h1><center>P E R S</center></h1>
+    <i class="glyphicon glyphicon-plus-sign col-md-" id="addSubReddit">Add Subreddit</i>
+    <i class="glyphicon glyphicon-plus-sign col-md-" id="addNpr">Add NPR Feed</i>
+    <i class="glyphicon glyphicon-plus-sign col-md-" id="addRss">Add Other RSS Feed</i>
+    <div class="panel" id="addSubReddit">
+      <form><input type="text" placeholder="Enter subreddit" id="addSubReddit" required></input>
+        <button class="addSource" id="addSubReddit">Add Source</button></form>
+      </div>
+      <div class="panel" id="addNpr">
+        <form><input type="text" placeholder="Enter NPR Program" required></input>
+          <button class="addSource" id="addNpr">Add Source</button></form>
+        </div>
+        <div class="panel" id="addRss">
+          <form><input type="text" placeholder="Enter URL" required pattern="https?://.+"></input>
+            <button class="addSource" id="addRss">Add Source</button></form>
+          </div>
+          <div class="container">
+            <span class="following row span10">
+              <h3>Your Followings</h3>
+              <div id="followings"></div>
+            </span>
 
-    <div class="container">
-    <span class="following row span10">
-    <h3>Your Followings</h3>
-    <div id="followings"></div>
-    </span>
-    <iframe id="articleFrame" src="./iframe.html" name="iframe_a"></iframe>
-    <!-- change src to redirect iframe view -->
-    </div>
-<!-- Your Page -->
-    <!-- <span class="pages span4"><h3>Your Pages</h3></div> -->
+          <!--   <div class="tweet">
+              <h1>Twitter</h1>
+            </div> -->
+
+            <iframe id="articleFrame" src="./iframe.html" name="iframe_a"></iframe>
+
+            <!-- change src to redirect iframe view -->
+          </div>
+          <!-- Your Page -->
+          <!-- <span class="pages span4"><h3>Your Pages</h3></div> -->
 
 
 
-<!-- libraries -->
-		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+          <!-- libraries -->
+          <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <!--     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script> -->
-    <script src="basicApp.js"></script>
-    <!-- <script src="./app/app.js"></script> -->
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+  <script src="basicApp.js"></script>
+  <!-- <script src="twit.js"></script> -->
+  <!-- <script src="./app/app.js"></script> -->
 
-  </div>
-  </body>
+</div>
+</body>
