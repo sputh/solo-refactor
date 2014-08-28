@@ -50,6 +50,7 @@ var getNpr = function(cat) {
   var url = 'http://api.npr.org/query?id='+id+'&apiKey=MDE2NDAyNjQ0MDE0MDkwMTA3NjdiNDRlYQ001&output=json';
   $.getJSON(url, function (data) {
     $.each(data.list.story, function(i, post) {
+      console.log(post);
       var divContainer = $('<div></div>');
       divContainer.append('<div class="content clear"><img src="./assets/npr.png" class="icon">')
       if(post.thumbnail) {
